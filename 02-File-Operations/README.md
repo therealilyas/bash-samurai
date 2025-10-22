@@ -1,24 +1,24 @@
 
+---
 
-# 2. Terminal asoslari va fayl tizimi
+# **02-File-Operations/README.md**
 
-**Asosiy buyruqlar**
+```markdown
+# 02-File-Operations – Fayllar bilan ishlash
 
-| Buyruq | Ma'no                      |
-| ------ | -------------------------- |
-| pwd    | Joriy katalogni ko'rsatadi |
-| ls     | Katalog ichini ro'yxatlash |
-| cd     | Katalogni o'zgartirish     |
-| mkdir  | Yangi katalog yaratish     |
-| rmdir  | Bo'sh katalogni o'chirish  |
-
-**Amaliy mashq 2**
-
-* Vazifa: `project` nomli katalog yarating, ichida `src` va `bin` papkalarini yarating.
-* Kutilgan output (`ls project`):
-
-```
-bin  src
-```
+## Asosiy buyruqlar
+| Buyruq | Tavsif |
+|--------|--------|
+| `cat file.txt` | Faylni ko‘rsatish |
+| `head file.txt` | Faylning bosh qismini ko‘rsatish |
+| `tail file.txt` | Faylning oxir qismini ko‘rsatish |
+| `cp src dest` | Fayl nusxasini yaratish |
+| `mv old new` | Faylni ko‘chirish yoki nomini o‘zgartirish |
+| `rm file` | Faylni o‘chirish |
 
 ---
+
+## Vazifa 02: Faylning bosh va oxir qismini chiqarish
+```bash
+head -n 5 example.txt
+tail -n 5 example.txt
