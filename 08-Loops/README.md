@@ -434,7 +434,6 @@ for fayl in *; do
     # Bu yerda faylni qayta ishlash kodi
 done
 ```
-
 ### Amaliy loyihalar
 
 #### Loyiha 1: Progress bar
