@@ -1,7 +1,7 @@
 <h1 align="center">⚔️ BASH-SAMURAI — 0 dan Samurai gacha (O‘zbek tilida)</h1>
 <!-- New Branch qo'shish:
 Matnlar uchun: texts
-Bash fayllar uchun: scripts
+Bash fayllar uchun: scripts 
 Yangi features uchun: features
 -->
 <p align="center">
