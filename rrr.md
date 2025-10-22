@@ -1,494 +1,282 @@
-## 🔟 TO'LDIRISH, TIZIMLI BUYRUQLAR VA SUBSHELL
-**Global nomi:** Globbing, Command Expansion & Subshells  
-**O'zbek nomi:** To'ldirish, tizimli buyruqlar va subshell
 
-### Globbing (Wildcard) - Fayl nomi shablonlari
 
-Globbing - bu fayllarni nomi bo'yicha qidirish uchun maxsus belgilar.
+## 1️⃣2️⃣ PIPE VA FILTRLAR (grep, awk, sed, cut, sort, uniq)
+**Global nomi:** Pipes and Filters  
+**O'zbek nomi:** Pipe va filtrlar
 
-**Hayotiy misol:** Do'konda "Barcha qizil olma" deb so'rasangiz - bu globbing. Aniq nom emas, shart.
+### Pipe (|) nima?
 
-#### Asosiy wildcard belgilar:
+Pipe - bu bir buyruqning natijasini boshqa buyruqqa uzatish. Konveyer lentasidek.
 
-**1. `*` - Istalgan belgilar (0 yoki ko'p)**
+**Hayotiy misol:** Zavod konveyeri - har bir ishchi o'z ishini qiladi va keyingisiga uzatadi. Birinchisi kesadi, ikkinchisi bo'yaydi, uchinchisi qadoqlaydi.
 
 ```bash
-# Barcha fayllar
-ls *
+# Oddiy pipe
+ls | wc -l                # Fayllar sonini sanash
 
-# .txt bilan tugaydigan fayllar
-ls *.txt
-
-# test bilan boshlanadigan fayllar
-ls test*
-
-# Ichida "log" bo'lgan fayllar
-ls *log*
-
-# Katalogdagi barcha .jpg fayllar
-ls images/*.jpg
+# Ko'p pipe
+cat fayl.txt | grep "muhim" | sort | uniq
 ```
 
-**Misollar:**
+### grep - Qidirish filtri
+
+`grep` - matndan kerakli qatorlarni topish.
+
+**Global pattern:** grep = Global Regular Expression Print
+
+#### Asosiy ishlatish:
+
 ```bash
-# Barcha Python fayllar
-for fayl in *.py; do
-    echo "Python fayl: $fayl"
-done
+# Oddiy qidirish
+grep "qidiruv" fayl.txt
 
-# Barcha backup fayllarni o'chirish
-rm *backup*
+# Katta-kichik harfga e'tibor bermay
+grep -i "qidiruv" fayl.txt
 
-# 2024 bilan boshlanadigan papkalar
-ls -d 2024*/
+# Butun so'zni qidirish
+grep -w "test" fayl.txt
+
+# Qator raqami bilan
+grep -n "xato" log.txt
+
+# Invers (ushbu so'z BO'LMAGAN qatorlar)
+grep -v "spam" email.txt
+
+# Rekursiv (barcha fayllarda)
+grep -r "TODO" /project/
+
+# Faqat fayl nomlari
+grep -l "error" *.log
+
+# Faqat sonini ko'rsatish
+grep -c "success" log.txt
 ```
 
-**2. `?` - Bitta belgi**
+**Hayotiy misollar:**
 
 ```bash
-# Aniq 4 ta belgili fayllar
-ls ????.txt
+# IP manzillarni topish
+grep -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' access.log
 
-# test1.txt, test2.txt, testA.txt (test + 1 belgi + .txt)
-ls test?.txt
+# Email topish
+grep -E '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}' users.txt
 
-# file1.log, file2.log, ... file9.log
-ls file?.log
+# Xatolarni filtrlash
+grep -i "error\|warning\|critical" system.log
+
+# Kontekst bilan (oldingi va keyingi qatorlar)
+grep -C 3 "exception" app.log    # 3 ta qator oldin va keyin
+grep -B 2 "error" app.log         # 2 ta qator oldin
+grep -A 5 "error" app.log         # 5 ta qator keyin
 ```
 
-**3. `[ ]` - Belgilar to'plami**
-
+**Pipe bilan:**
 ```bash
-# a, b yoki c bilan boshlanadigan
-ls [abc]*.txt
+# Fayllar ichidan qidirish
+ls -la | grep "\.txt$"
 
-# 1, 2 yoki 3 bilan boshlanadigan
-ls [123]*.log
+# Process topish
+ps aux | grep "nginx"
 
-# Diapazon: a dan z gacha
-ls [a-z]*.txt
+# Active userlar
+who | grep -v "^$"
 
-# Raqamlar: 0 dan 9 gacha
-ls file[0-9].txt
-
-# Katta harflar
-ls [A-Z]*.pdf
-
-# Inkor: a, b, c DAN BOSHQA
-ls [!abc]*.txt
-# yoki
-ls [^abc]*.txt
+# Log dan IP lar
+cat access.log | grep "404" | awk '{print $1}' | sort | uniq
 ```
 
-**Misollar:**
+### awk - Matn qayta ishlash tili
+
+`awk` - ustunlar bilan ishlash uchun kuchli vosita.
+
+#### Asosiy tushunchalar:
+
+- `$1, $2, $3` - ustunlar (bo'sh joy yoki tab bilan ajratilgan)
+- `$0` - butun qator
+- `NR` - qator raqami
+- `NF` - ustunlar soni
+
 ```bash
-# Faqat katta harf bilan boshlanadigan
-ls [A-Z]*
+# Birinchi ustunni chiqarish
+awk '{print $1}' fayl.txt
 
-# Raqam bilan tugaydigan fayllar
-ls *[0-9].txt
+# Bir nechta ustun
+awk '{print $1, $3}' fayl.txt
 
-# Barcha soz va undosh harflar
-ls *[aeiouAEIOU]*
+# Maxsus format
+awk '{print "Ism:", $1, "Yosh:", $2}' users.txt
+
+# Hisob-kitoblar
+awk '{sum += $1} END {print "Jami:", sum}' raqamlar.txt
 ```
 
-**4. `{ }` - Brace expansion (takrorlash)**
+**Hayotiy misollar:**
 
 ```bash
-# Bir nechta variantlar
-echo {red,green,blue}
-# Natija: red green blue
+# Disk hajmini ko'rish (faqat foiz)
+df -h | awk 'NR>1 {print $5, $6}'
 
-# Papkalar yaratish
-mkdir {2021,2022,2023,2024}
+# RAM ishlatilishi
+free -m | awk 'NR==2 {printf "%.2f%%\n", $3/$2*100}'
+
+# CSV dan ustun olish
+awk -F',' '{print $2}' data.csv
+
+# Log dan IP va vaqt
+awk '{print $1, $4}' access.log
+
+# Shartli chiqarish
+awk '$3 > 100 {print $1, $3}' sales.txt    # 3-ustun 100 dan katta
+
+# Bir nechta shart
+awk '$3 > 50 && $4 == "active" {print $0}' users.txt
+```
+
+**Murakkab misollar:**
+
+```bash
+# Jami va o'rtacha
+awk '{sum+=$1; count++} END {print "Jami:", sum, "O'rtacha:", sum/count}' numbers.txt
+
+# Top 10 IP
+awk '{print $1}' access.log | sort | uniq -c | sort -rn | head -10
+
+# CSV ni HTML jadvalga
+awk -F',' 'BEGIN {print "<table>"} 
+             {print "<tr><td>" $1 "</td><td>" $2 "</td></tr>"} 
+             END {print "</table>"}' data.csv
+```
+
+### sed - Matn tahrirlovchi
+
+`sed` - Stream EDitor, matnni qayta ishlash va o'zgartirish uchun.
+
+#### Asosiy buyruqlar:
+
+```bash
+# Almashtirish (birinchi uchraganini)
+sed 's/eski/yangi/' fayl.txt
+
+# Barcha uchraganlarini almashtirish
+sed 's/eski/yangi/g' fayl.txt
+
+# Katta-kichik harfga e'tibor bermay
+sed 's/eski/yangi/gi' fayl.txt
+
+# Faylni o'zgartirish (-i)
+sed -i 's/eski/yangi/g' fayl.txt
+
+# Ma'lum qatorni o'chirish
+sed '3d' fayl.txt                 # 3-qatorni o'chirish
+sed '1,5d' fayl.txt               # 1-5 qatorlarni o'chirish
+sed '/pattern/d' fayl.txt         # Pattern bo'lgan qatorlarni
+
+# Qatorlarni chiqarish
+sed -n '1,10p' fayl.txt           # Faqat 1-10 qatorlar
+sed -n '/pattern/p' fayl.txt      # Faqat pattern bo'lgan qatorlar
+```
+
+**Hayotiy misollar:**
+
+```bash
+# IP manzilni almashtirish
+sed 's/192.168.1.1/10.0.0.1/g' config.txt
+
+# Izohlarni o'chirish
+sed '/^#/d' skript.sh
+
+# Bo'sh qatorlarni o'chirish
+sed '/^$/d' fayl.txt
+
+# Qator boshiga qo'shish
+sed 's/^/PREFIX: /' fayl.txt
+
+# Qator oxiriga qo'shish
+sed 's/$/ - SUFFIX/' fayl.txt
+
+# Ma'lum qatordan keyin qo'shish
+sed '/pattern/a\Yangi qator' fayl.txt
+
+# Ma'lum qatordan oldin qo'shish
+sed '/pattern/i\Yangi qator' fayl.txt
+
+# Qatorni almashtirish
+sed '/pattern/c\Yangi matn' fayl.txt
+```
+
+**Murakkab misollar:**
+
+```bash
+# HTML teglarni o'chirish
+sed 's/<[^>]*>//g' index.html
+
+# Email maskirovka
+sed 's/\([a-z]\)[a-z]*@/\1***@/g' emails.txt
+# sardor@example.com → s***@example.com
+
+# Raqamlarni format qilish
+sed 's/\([0-9]\{3\}\)\([0-9]\{3\}\)\([0-9]\{4\}\)/\1-\2-\3/' phones.txt
+# 9981234567 → 998-123-4567
+
+# Bir nechta almashtirish
+sed -e 's/foo/bar/g' -e 's/hello/salom/g' fayl.txt
+
+# Config faylni yangilash
+sed -i.backup 's/^port=.*/port=8080/' config.ini
+```
+
+### cut - Ustunlarni kesish
+
+```bash
+# Ma'lum ustunni olish (bo'sh joy bilan)
+cut -d' ' -f1 fayl.txt            # Birinchi ustun
+
+# Bir nechta ustun
+cut -d',' -f1,3 data.csv          # 1 va 3-ustunlar
 
 # Diapazon
-echo {1..10}
-# Natija: 1 2 3 4 5 6 7 8 9 10
+cut -d':' -f1-3 /etc/passwd       # 1 dan 3 gacha
 
-echo {a..z}
-# Natija: a b c d e f ... x y z
-
-# Qadam bilan
-echo {0..100..10}
-# Natija: 0 10 20 30 40 50 60 70 80 90 100
-
-# Ichma-ich
-echo {A,B}{1,2}
-# Natija: A1 A2 B1 B2
+# Belgilar pozitsiyasi bo'yicha
+cut -c1-10 fayl.txt               # Birinchi 10 ta belgi
 ```
 
 **Hayotiy misollar:**
-```bash
-# Yil bo'yicha papkalar
-mkdir 2024-{01..12}
-# 2024-01, 2024-02, ..., 2024-12
-
-# Backup nusxalari
-cp fayl.txt{,.backup}
-# cp fayl.txt fayl.txt.backup
-
-# Fayllarni nusxalash
-cp important.doc{,.$(date +%F)}
-# important.doc.2025-10-23
-
-# Ko'p kengaytmali qidirish
-ls *.{jpg,png,gif}
-# Barcha rasm fayllar
-```
-
-**5. `**` - Rekursiv qidiruv (Bash 4+)**
 
 ```bash
-# Globstar yoqish
-shopt -s globstar
+# Foydalanuvchi nomlari
+cut -d':' -f1 /etc/passwd
 
-# Barcha kataloglardagi .txt fayllar
-ls **/*.txt
+# CSV dan email
+cut -d',' -f3 users.csv
 
-# Ichma-ich barcha Python fayllar
-ls **/*.py
+# Log dan vaqt
+cut -d' ' -f4,5 access.log
+
+# PATH ni ajratish
+echo $PATH | tr ':' '\n'
 ```
 
-### Command Substitution - Buyruq natijasini olish
-
-Buyruq natijasini o'zgaruvchiga saqlash:
-
-#### Usul 1: `$( )` (tavsiya etiladi)
+### sort - Saralash
 
 ```bash
-# Bugungi sana
-bugun=$(date +%Y-%m-%d)
-echo "Bugun: $bugun"
+# Alifbo tartibida
+sort fayl.txt
 
-# Fayllar soni
-soni=$(ls | wc -l)
-echo "Fayllar: $soni ta"
+# Teskari tartibda
+sort -r fayl.txt
 
-# Disk hajmi
-disk=$(df -h / | awk 'NR==2 {print $5}')
-echo "Disk: $disk to'lgan"
+# Raqamli tartibda
+sort -n numbers.txt
 
-# Hozirgi foydalanuvchi
-user=$(whoami)
-echo "Salom, $user!"
-```
+# Ma'lum ustun bo'yicha
+sort -k2 fayl.txt                 # 2-ustun bo'yicha
+sort -t',' -k3 data.csv           # Vergul bilan, 3-ustun
 
-#### Usul 2: `` ` ` `` - Backtick (eski usul)
+# Unique + sort
+sort -u fayl.txt                  # Dublikatlarni olib tashlash
 
-```bash
-# Eski usul
-bugun=`date +%Y-%m-%d`
+# Katta-kichik harfga e'tibor bermay
+sort -f fayl.txt
 
-# Yangi usul afzal ($( ) ko'rinishi aniqroq)
-bugun=$(date +%Y-%m-%d)
-```
-
-**Ichma-ich substitution:**
-```bash
-# Katalog hajmini topish
-katalog="/home/sardor"
-hajm=$(du -sh $(find "$katalog" -type f) | awk '{sum+=$1} END {print sum}')
-
-# Eng katta faylni topish
-eng_katta=$(ls -lS | head -2 | tail -1 | awk '{print $9}')
-echo "Eng katta fayl: $eng_katta"
-```
-
-**Hayotiy misollar:**
-```bash
-# Backup fayl nomi
-backup_fayl="backup_$(date +%Y%m%d_%H%M%S).tar.gz"
-tar -czf "$backup_fayl" mening_papka/
-
-# Log fayli yaratish
-log="log_$(hostname)_$(date +%F).log"
-echo "Dastur boshlandi" > "$log"
-
-# Eski fayllarni arxivlash
-arxiv="arxiv_$(date +%Y-%m).tar.gz"
-find . -mtime +30 -type f -print0 | tar -czf "$arxiv" --null -T -
-```
-
-### Process Substitution - Jarayon natijasini fayl sifatida
-
-`<( )` - buyruq natijasini vaqtinchalik fayl sifatida ishlatish:
-
-```bash
-# Ikki katalogni solishtirish
-diff <(ls dir1) <(ls dir2)
-
-# Saralangan ro'yxatlarni birlashtirish
-comm <(sort fayl1.txt) <(sort fayl2.txt)
-
-# Fayllar hajmini taqqoslash
-paste <(ls -1) <(ls -lh | awk '{print $5}')
-```
-
-**Hayotiy misol: Log tahlil**
-```bash
-# Eng ko'p uchraydigan IP manzillar
-diff <(cat access.log | awk '{print $1}' | sort | uniq -c | sort -rn | head -10) \
-     <(cat access.log.1 | awk '{print $1}' | sort | uniq -c | sort -rn | head -10)
-```
-
-### Subshell - Alohida shell muhiti
-
-`( )` - Buyruqlarni alohida shell muhitida ishlatish:
-
-```bash
-# Hozirgi katalog
-echo "Avval: $(pwd)"
-
-# Subshell da - hozirgi katalogni o'zgartirish
-(
-    cd /tmp
-    echo "Subshell ichida: $(pwd)"
-    touch test.txt
-)
-
-# Tashqarida - o'zgarmagan
-echo "Keyin: $(pwd)"
-```
-
-**Foydasi:**
-- Asl muhitni o'zgartirmaydi
-- O'zgaruvchilar faqat subshell ichida
-- Parallel ishlash uchun
-
-```bash
-# Parallel backuplar
-(
-    echo "Backup 1 boshlandi..."
-    tar -czf backup1.tar.gz papka1/
-    echo "Backup 1 tugadi"
-) &
-
-(
-    echo "Backup 2 boshlandi..."
-    tar -czf backup2.tar.gz papka2/
-    echo "Backup 2 tugadi"
-) &
-
-# Barcha subshell larni kutish
-wait
-echo "Barcha backuplar tayyor!"
-```
-
-### Background va Foreground
-
-```bash
-# Background da ishlatish (&)
-sleep 10 &
-echo "Sleep background da, biz davom etamiz"
-
-# Jarayonlarni ko'rish
-jobs
-
-# Foreground ga olib chiqish
-fg %1
-
-# Background ga yuborish (Ctrl+Z dan keyin)
-bg %1
-
-# Jarayonni to'xtatish
-kill %1
-```
-
-**Hayotiy misol: Ko'p ishni parallel bajarish**
-```bash
-#!/bin/bash
-
-echo "Ko'p fayllarni qayta ishlash..."
-
-for fayl in *.jpg; do
-    (
-        echo "Qayta ishlanmoqda: $fayl"
-        convert "$fayl" -resize 800x600 "resized_$fayl"
-        echo "✓ $fayl tayyor"
-    ) &
-    
-    # 4 tadan ortiq parallel jarayon yo'q
-    if (( $(jobs -r | wc -l) >= 4 )); then
-        wait -n  # Birortasi tugashini kutish
-    fi
-done
-
-wait  # Barcha tugashini kutish
-echo "Hammasi tayyor!"
-```
-
-### Tilde expansion (~)
-
-```bash
-# Uy katalogi
-cd ~
-cd ~/Documents
-cd ~/Desktop
-
-# Boshqa foydalanuvchi uyi
-cd ~username
-
-# Oldingi katalog
-cd ~-
-# yoki
-cd -
-
-# PATH ga qo'shish
-export PATH="$PATH:~/bin:~/scripts"
-```
-
-### Parameter expansion - O'zgaruvchilarni kengaytirish
-
-```bash
-# Oddiy
-echo $fayl
-
-# Xavfsiz (bo'sh joy bilan)
-echo "${fayl}"
-
-# Default qiymat
-echo "${port:-8080}"  # Agar port bo'sh bo'lsa 8080
-
-# Bo'sh bo'lsa berish va saqlash
-port=${port:=8080}
-
-# Bo'sh bo'lsa xato
-fayl=${fayl:?"Fayl kiritilmadi!"}
-
-# Bo'sh bo'lmasa, boshqa qiymat
-echo "${port:+Server ishlamoqda}"
-```
-
-**Matn bilan ishlash:**
-```bash
-fayl="document.backup.txt"
-
-# Uzunlik
-echo ${#fayl}                    # 20
-
-# Kesish
-echo ${fayl:0:8}                 # document
-
-# Oldidan o'chirish
-echo ${fayl#*.}                  # backup.txt (qisqa)
-echo ${fayl##*.}                 # txt (uzun)
-
-# Orqadan o'chirish
-echo ${fayl%.*}                  # document.backup (qisqa)
-echo ${fayl%%.*}                 # document (uzun)
-
-# Almashtirish
-echo ${fayl/backup/final}        # document.final.txt
-echo ${fayl//./–}                # document-backup-txt
-
-# Katta-kichik
-echo ${fayl^^}                   # DOCUMENT.BACKUP.TXT
-echo ${fayl,,}                   # document.backup.txt
-```
-
-### Amaliy loyiha: Smart backup
-
-```bash
-#!/bin/bash
-
-BACKUP_DIR="$HOME/Backups"
-SANA=$(date +%Y-%m-%d_%H-%M-%S)
-HOSTNAME=$(hostname)
-LOG_FAYL="$BACKUP_DIR/backup.log"
-
-mkdir -p "$BACKUP_DIR"
-
-# Log funktsiyasi
-log() {
-    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" | tee -a "$LOG_FAYL"
-}
-
-log "=== BACKUP BOSHLANDI ==="
-log "Server: $HOSTNAME"
-
-# Backup papkasi
-BACKUP_PAPKA="$BACKUP_DIR/${HOSTNAME}_${SANA}"
-mkdir -p "$BACKUP_PAPKA"
-
-# Muhim kataloglar
-declare -a KATALOGLAR=(
-    "$HOME/Documents"
-    "$HOME/Pictures"
-    "$HOME/Projects"
-    "/etc/nginx"
-    "/var/www"
-)
-
-jami_hajm=0
-muvaffaqiyatli=0
-xato=0
-
-for katalog in "${KATALOGLAR[@]}"; do
-    if [ ! -d "$katalog" ]; then
-        log "⊘ $katalog topilmadi"
-        ((xato++))
-        continue
-    fi
-    
-    katalog_nomi=$(basename "$katalog")
-    arxiv="${BACKUP_PAPKA}/${katalog_nomi}.tar.gz"
-    
-    log "⟳ Backup: $katalog"
-    
-    # Subshell da (parallel)
-    (
-        if tar -czf "$arxiv" -C "$(dirname "$katalog")" "$katalog_nomi" 2>/dev/null; then
-            hajm=$(du -h "$arxiv" | cut -f1)
-            log "✓ $katalog → $arxiv ($hajm)"
-        else
-            log "✗ Xato: $katalog"
-        fi
-    ) &
-    
-    # Maksimal 3 ta parallel
-    while (( $(jobs -r | wc -l) >= 3 )); do
-        sleep 1
-    done
-done
-
-# Barcha tugatilishini kutish
-wait
-
-# Eski backuplarni tozalash (30 kundan eski)
-log "⟳ Eski backuplarni tozalash..."
-find "$BACKUP_DIR" -type f -name "*.tar.gz" -mtime +30 -delete
-
-# Jami hajm
-jami_hajm=$(du -sh "$BACKUP_PAPKA" | cut -f1)
-
-log "=== NATIJA ==="
-log "Backup papka: $BACKUP_PAPKA"
-log "Jami hajm: $jami_hajm"
-log "Muvaffaqiyatli: $muvaffaqiyatli"
-log "Xatolar: $xato"
-log "=== BACKUP TUGADI ==="
-```
-
-### 📝 Vazifalar:
-
-1. **Vazifa 1:** Wildcard yordamida katalogdagi barcha .log fayllarni topib, o'chiruvchi skript yozing
-2. **Vazifa 2:** Brace expansion bilan 12 oylik papkalar yarating (2024-01, 2024-02, ...)
-3. **Vazifa 3:** Command substitution yordamida tizim ma'lumotlarini (CPU, RAM, Disk) yig'uvchi skript
-4. **Vazifa 4:** Subshell da 5 ta faylni parallel ravishda nusxalovchi dastur yozing
-5. **Vazifa 5:** Globbing pattern yordamida fayllarni turlariga ko'ra (tur-rasm/, tur-hujjat/) ajratuvchi organizator
-
----
-
-Keyingi mavzularni ham shu tarzda davom ettiraymi? Qolgan 11 ta mavzu:
-11. Fayl kiritish/chiqarish va redirektsiya
-12. Pipe va filtrlar (grep, awk, sed, cut, sort, uniq)
-13. Arraylar va associative arraylar
-14. Regex va grep/egrep
-15. Script yozish va debug usullari
-16. Cron, systemd timers
-17. Tarmoq buyruqlari
-18. Paket boshqaruv
-19. Best practices
-20. Amaliy loyihalar
-21. Cheat sheet
+# Inson o'qiy oladigan raqamlar (1K, 1M)
