@@ -79,9 +79,8 @@ Har bir bo‘lim tayyor formatda, faqat loyihang nomi va linklarini to‘ldirasa
 
 ---
 
-````markdown
 <!-- ========================== -->
-<!--   BASH SAMURAI   + BADGES -->
+<!--     PROJECT TITLE + BADGES -->
 <!-- ========================== -->
 
 <h1 align="center">⚔️ PROJECT-NAME — 0 dan Hero gacha</h1>
