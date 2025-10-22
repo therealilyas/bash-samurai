@@ -1,0 +1,8 @@
+=== TIZIM MONITORING BOSHLANDI ===
+Interval: 5s
+Log: system_monitor.log
+
+[2025-10-23 01:35:55] #1 - CPU: % | RAM: % | Disk: 9.6G%
+[2025-10-23 01:36:00] #2 - CPU: % | RAM: % | Disk: 9.6G%
+[2025-10-23 01:36:06] #3 - CPU: % | RAM: % | Disk: 9.6G%
+[2025-10-23 01:36:11] #4 - CPU: % | RAM: % | Disk: 9.6G%
