@@ -1,31 +1,14 @@
-Mavzu: Bash nima va uning asosiy tushunchalari
+# 00-Intro – Bashga Kirish
 
-Nazariya:
+## Bash nima?
+Bash (Bourne Again Shell) – bu terminal orqali kompyuter bilan muloqot qilish, skript yozish va avtomatlashtirish vositasi.
 
-Bash (Bourne Again SHell) – bu terminal orqali kompyuter bilan muloqot qilish, skript yozish va avtomatlashtirish vositasi.
+## Terminal nima?
+Terminal – matn orqali kompyuter bilan muloqot qilish dasturi.
 
-Bash yordamida fayl tizimini boshqarish, dasturlarni ishga tushirish, o‘zgaruvchilar bilan ishlash va tizim vazifalarini avtomatlashtirish mumkin.
+---
 
-Terminal – bu sizga kompyuter bilan matn orqali gaplashish imkonini beruvchi dastur.
-
-Amaliy misol:
-
+## Misol: "Salom, Bash!"
+```bash
 #!/bin/bash
 echo "Salom, Bash!"
-
-
-Vazifa:
-
-Foydalanuvchidan ism so‘rab, uni salomlashadigan skript yozing.
-
-Output example:
-
-Ismingizni kiriting: Ilyas
-Salom, Ilyas!
-
-
-Fayllar:
-
-hello.sh – “Salom, Bash!” dasturi
-
-challenge_00.sh – foydalanuvchidan ism olib salomlashish
