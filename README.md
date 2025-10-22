@@ -90,10 +90,9 @@ cat 01-Intro/README.md
 ---
 
 ## 💬 Aloqa
-
-# 👤 **Muallif:** [@therealilyas](https://github.com/therealilyas)
-# 📧 **Email:** [ilyas.sultanov@accesa.uz](mailto:youremail@accesa.uz)
-# 💼 **LinkedIn:** [Ilyas Sultan](https://www.linkedin.com/in/ilyas-sultanov/)
+### 👤 **Muallif:** [@therealilyas](https://github.com/therealilyas)
+### 📧 **Email:** [ilyas.sultanov@accesa.uz](mailto:youremail@accesa.uz)
+### 💼 **LinkedIn:** [Ilyas Sultan](https://www.linkedin.com/in/ilyas-sultanov/)
 
 ---
 
