@@ -29,5 +29,3 @@ echo "Salom, $name!"
 Ismingizni kiriting: Ilyas
 Salom, Ilyas!
 ```
-
-```
