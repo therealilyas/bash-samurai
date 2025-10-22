@@ -1,4 +1,4 @@
-<h1 align="center">🐚 BASH-SAMURAI — 0 dan Samurai gacha (O‘zbek tilida)</h1>
+<h1 align="center">⚔️ BASH-SAMURAI — 0 dan Samurai gacha (O‘zbek tilida)</h1>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Language-Bash-blue?style=flat-square">
@@ -35,6 +35,21 @@ Har bir bo‘limda **nazariya, amaliy mashqlar, vazifalar va `output` namunalari
 
 ---
 
+## ⚙️ O‘rnatish
+
+```bash
+# Repozitoriyani klonlash
+git clone https://github.com/therealilyas/bash-samurai.git
+
+# Loyihaga kirish
+cd bash-samurai
+
+# Har bir bobni o‘qish
+cat 01-Intro/README.md
+```
+
+---
+
 ## 🧠 Siz Nimalarni O‘rganasiz?
 
 ✅ Bash buyruqlari va sintaksisi  
@@ -55,64 +70,6 @@ Har bir bo‘limda **nazariya, amaliy mashqlar, vazifalar va `output` namunalari
 
 ---
 
-## ⚙️ O‘rnatish
-
-```bash
-# Repozitoriyani klonlash
-git clone https://github.com/therealilyas/bash-samurai.git
-
-# Loyihaga kirish
-cd bash-samurai
-
-# Har bir bobni o‘qish
-cat 01-Intro/README.md
-```
----
-
-## 📚 Qo‘shimcha Manbalar
-
----
-
-Ajoyib! 🔥 Quyida senga **universal GitHub README.md template** beraman — aynan “**BASH-SAMURAI**” kabi loyihalar uchun mos.
-U **chiroyli, professional, jozibali**, va **har qanday texnik loyiha** uchun foydalanish mumkin.
-Har bir bo‘lim tayyor formatda, faqat loyihang nomi va linklarini to‘ldirasan ✅
-
----
-
-<!-- ========================== -->
-<!--     PROJECT TITLE + BADGES -->
-<!-- ========================== -->
-
-<h1 align="center">⚔️ PROJECT-NAME — 0 dan Hero gacha</h1>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Language-Bash-blue?style=flat-square">
-  <img src="https://img.shields.io/badge/Level-Beginner%20→%20Pro-green?style=flat-square">
-  <img src="https://img.shields.io/github/license/YOUR_USERNAME/YOUR_REPO?style=flat-square">
-  <img src="https://img.shields.io/github/stars/YOUR_USERNAME/YOUR_REPO?style=social">
-</p>
-
-<p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&duration=3000&pause=800&color=00FFB3&center=true&vCenter=true&width=600&lines=Learn+Bash+Like+a+Samurai!;Automate+Everything+⚙️;Master+the+Terminal+💻">
-</p>
-
----
-
-
-## 🗂️ MUNDARIJA
-
-| № | Bo‘lim | Tavsif |
-|---|--------|--------|
-| 01 | [Kirish va Muhitni Sozlash](./01-Intro/README.md) | Loyiha haqida, o‘rnatish va sozlash |
-| 02 | [Terminal Asoslari](./02-Terminal-Basics/README.md) | Asosiy buyruqlar, navigatsiya, fayl tizimi |
-| 03 | [Fayllar bilan Ishlash](./03-File-Operations/README.md) | `cat`, `mv`, `rm`, `cp` va boshqalar |
-| 04 | [Ruxsatlar va Foydalanuvchilar](./04-Permissions-Users/README.md) | `chmod`, `chown`, `sudo`, xavfsizlik asoslari |
-| 05 | [O‘zgaruvchilar](./05-Variables/README.md) | Lokal/global o‘zgaruvchilar, `$PATH`, `export` |
-| 06 | [Arifmetika va Satrlar](./06-Arithmetics-Strings/README.md) | Hisoblash amallari va matn bilan ishlash |
-| 07 | [Shart Operatorlari](./07-Conditionals/README.md) | `if`, `else`, `elif`, `case` bilan mantiq yaratish |
-
----
-
 ## 💡 Asosiy Xususiyatlar
 
 - 📘 O‘zbek tilidagi tushunarli izohlar  
@@ -120,31 +77,6 @@ Har bir bo‘lim tayyor formatda, faqat loyihang nomi va linklarini to‘ldirasa
 - ⚡ Minimal va toza tuzilma  
 - 🧠 Real hayotda qo‘llaniladigan bilimlar  
 - 🔥 Cheat sheet va test topshiriqlar
-
----
-
-## ⚙️ O‘rnatish
-
-```bash
-# Repozitoriyani klonlash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
-
-# Loyihaga kirish
-cd YOUR_REPO
-
-# Faylni ko‘rish
-cat 01-Intro/README.md
-````
-
----
-
-## 🧠 Bu yerda si quyidagilarni o‘rganasiz
-
-✅ Bash buyruqlarini samarali ishlatish
-✅ Linux terminalida ishlashni chuqur tushunish
-✅ Skriptlar yordamida avtomatlashtirish
-✅ Real loyihalarda Bashdan foydalanish
-✅ System Admin / DevOps asoslarini o‘zlashtirish
 
 ---
 
@@ -159,9 +91,9 @@ cat 01-Intro/README.md
 
 ## 💬 Aloqa
 
-👤 **Muallif:** [@therealilyas](https://github.com/therealilyas)
-📧 **Email:** [ilyas.sultanov@accesa.uz](mailto:youremail@accesa.uz)
-💼 **LinkedIn:** [Ilyas Sultan](https://www.linkedin.com/in/ilyas-sultanov/)
+# 👤 **Muallif:** [@therealilyas](https://github.com/therealilyas)
+# 📧 **Email:** [ilyas.sultanov@accesa.uz](mailto:youremail@accesa.uz)
+# 💼 **LinkedIn:** [Ilyas Sultan](https://www.linkedin.com/in/ilyas-sultanov/)
 
 ---
 
