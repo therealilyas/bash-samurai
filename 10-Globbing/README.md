@@ -418,6 +418,188 @@ echo "Fayllar: $jami" | tee -a "$LOG_FAYL"
 echo "Hajm: $hajm" | tee -a "$LOG_FAYL"
 ```
 
+---
+
+
+### Amaliy loyiha: Fayl organizatori
+
+```bash
+#!/bin/bash
+
+shopt -s nullglob  # Bo'sh glob dan xato bermaslik
+
+echo "=== FAYL ORGANIZATORI ==="
+echo "Katalog: $(pwd)"
+echo ""
+
+# Hisoblagichlar
+jami=0
+suratrlar=0
+hujjatlar=0
+videoar=0
+musiqa=0
+arxivlar=0
+boshqalar=0
+
+# Papkalar yaratish
+mkdir -p Sorted/{Images,Documents,Videos,Music,Archives,Others}
+
+# Rasmlar
+for fayl in *.{jpg,jpeg,png,gif,bmp,svg}; do
+    [ -f "$fayl" ] || continue
+    mv "$fayl" Sorted/Images/
+    echo "📷 $fayl → Images/"
+    ((suratlar++))
+    ((jami++))
+done
+
+# Hujjatlar
+for fayl in *.{txt,doc,docx,pdf,odt,xls,xlsx,ppt,pptx}; do
+    [ -f "$fayl" ] || continue
+    mv "$fayl" Sorted/Documents/
+    echo "📄 $fayl → Documents/"
+    ((hujjatlar++))
+    ((jami++))
+done
+
+# Videolar
+for fayl in *.{mp4,avi,mkv,mov,wmv,flv}; do
+    [ -f "$fayl" ] || continue
+    mv "$fayl" Sorted/Videos/
+    echo "🎬 $fayl → Videos/"
+    ((videoar++))
+    ((jami++))
+done
+
+# Musiqa
+for fayl in *.{mp3,wav,flac,aac,ogg}; do
+    [ -f "$fayl" ] || continue
+    mv "$fayl" Sorted/Music/
+    echo "🎵 $fayl → Music/"
+    ((musiqa++))
+    ((jami++))
+done
+
+# Arxivlar
+for fayl in *.{zip,tar,gz,bz2,7z,rar}; do
+    [ -f "$fayl" ] || continue
+    mv "$fayl" Sorted/Archives/
+    echo "📦 $fayl → Archives/"
+    ((arxivlar++))
+    ((jami++))
+done
+
+# Boshqalar
+for fayl in *; do
+    [ -f "$fayl" ] || continue
+    [ "$fayl" != "$(basename $0)" ] || continue  # Skriptni o'chirmaslik
+    mv "$fayl" Sorted/Others/
+    echo "📎 $fayl → Others/"
+    ((boshqalar++))
+    ((jami++))
+done
+
+# Natija
+echo ""
+echo "=== NATIJA ==="
+echo "Jami ko'chirildi: $jami"
+echo "  Suratlar: $suratlar"
+echo "  Hujjatlar: $hujjatlar"
+echo "  Videolar: $videoar"
+echo "  Musiqa: $musiqa"
+echo "  Arxivlar: $arxivlar"
+echo "  Boshqalar: $boshqalar"
+
+# Bo'sh papkalarni o'chirish
+find Sorted -type d -empty -delete
+```
+---
+
+
+### Amaliy loyiha: Smart backup
+
+```bash
+#!/bin/bash
+
+BACKUP_DIR="$HOME/Backups"
+SANA=$(date +%Y-%m-%d_%H-%M-%S)
+HOSTNAME=$(hostname)
+LOG_FAYL="$BACKUP_DIR/backup.log"
+
+mkdir -p "$BACKUP_DIR"
+
+# Log funktsiyasi
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" | tee -a "$LOG_FAYL"
+}
+
+log "=== BACKUP BOSHLANDI ==="
+log "Server: $HOSTNAME"
+
+# Backup papkasi
+BACKUP_PAPKA="$BACKUP_DIR/${HOSTNAME}_${SANA}"
+mkdir -p "$BACKUP_PAPKA"
+
+# Muhim kataloglar
+declare -a KATALOGLAR=(
+    "$HOME/Documents"
+    "$HOME/Pictures"
+    "$HOME/Projects"
+    "/etc/nginx"
+    "/var/www"
+)
+
+jami_hajm=0
+muvaffaqiyatli=0
+xato=0
+
+for katalog in "${KATALOGLAR[@]}"; do
+    if [ ! -d "$katalog" ]; then
+        log "⊘ $katalog topilmadi"
+        ((xato++))
+        continue
+    fi
+    
+    katalog_nomi=$(basename "$katalog")
+    arxiv="${BACKUP_PAPKA}/${katalog_nomi}.tar.gz"
+    
+    log "⟳ Backup: $katalog"
+    
+    # Subshell da (parallel)
+    (
+        if tar -czf "$arxiv" -C "$(dirname "$katalog")" "$katalog_nomi" 2>/dev/null; then
+            hajm=$(du -h "$arxiv" | cut -f1)
+            log "✓ $katalog → $arxiv ($hajm)"
+        else
+            log "✗ Xato: $katalog"
+        fi
+    ) &
+    
+    # Maksimal 3 ta parallel
+    while (( $(jobs -r | wc -l) >= 3 )); do
+        sleep 1
+    done
+done
+
+# Barcha tugatilishini kutish
+wait
+
+# Eski backuplarni tozalash (30 kundan eski)
+log "⟳ Eski backuplarni tozalash..."
+find "$BACKUP_DIR" -type f -name "*.tar.gz" -mtime +30 -delete
+
+# Jami hajm
+jami_hajm=$(du -sh "$BACKUP_PAPKA" | cut -f1)
+
+log "=== NATIJA ==="
+log "Backup papka: $BACKUP_PAPKA"
+log "Jami hajm: $jami_hajm"
+log "Muvaffaqiyatli: $muvaffaqiyatli"
+log "Xatolar: $xato"
+log "=== BACKUP TUGADI ==="
+```
+
+
 ### 📝 Vazifalar:
 
 1. **Vazifa 1:** Barcha .txt fayllarni topib, har birining qator sonini hisoblovchi skript (globbing)
