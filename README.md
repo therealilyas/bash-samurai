@@ -1,5 +1,9 @@
 <h1 align="center">⚔️ BASH-SAMURAI — 0 dan Samurai gacha (O‘zbek tilida)</h1>
-
+<!-- New Branch qo'shish:
+Matnlar uchun: texts
+Bash fayllar uchun: scripts
+Yangi features uchun: features
+-->
 <p align="center">
   <img src="https://img.shields.io/badge/Language-Bash-blue?style=flat-square">
   <img src="https://img.shields.io/badge/Level-Beginner%20→%20Pro-green?style=flat-square">
