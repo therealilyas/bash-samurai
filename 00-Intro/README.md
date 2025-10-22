@@ -1,31 +1,16 @@
-# 00-Intro – Bashga Kirish
+# Bash: 0 dan Hero gacha — Toʻliq Qoʻllanma (Oʻzbekcha)
 
-## Bash nima?
-Bash (Bourne Again Shell) – bu terminal orqali kompyuter bilan muloqot qilish, skript yozish va avtomatlashtirish vositasi.
+**Kirib kelish**  
 
-## Terminal nima?
-Terminal – matn orqali kompyuter bilan muloqot qilish dasturi.
+Bu qo'llanma sizni Bash (Bourne Again Shell) bilan 0 dan boshlab professional darajagacha olib chiqadi. Har bob tartibli, misollar bilan, amaliy vazifalar va `.sh` fayllari bilan berilgan. Oxirida tezkor `cheat sheet` va umumiy buyruqlar jadvali mavjud.
 
 ---
 
-## Misol: "Salom, Bash!"
-```bash
-#!/bin/bash
-echo "Salom, Bash!"
-```
+## Shell tarixi qisqacha
 
-## Vazifa 00: Foydalanuvchidan ism olib, salomlashish
-1. Foydalanuvchidan ism so‘rab oling
-2. Salomlashish matnini chiqarish
-
-```
-#!/bin/bash
-read -p "Ismingizni kiriting: " name
-echo "Salom, $name!"
-```
-
-## Output misol:
-```
-Ismingizni kiriting: Ilyas
-Salom, Ilyas!
-```
+| Shell       | Yili | Tavsifi                          |
+|------------|------|---------------------------------|
+| sh (Bourne Shell) | 1977 | Unix tizimlari uchun birinchi standart shell |
+| csh (C Shell)    | 1978 | C-sintaksisiga yaqinlashgan shell |
+| ksh (Korn Shell) | 1980 | sh ustiga qulayliklar qo‘shilgan |
+| bash (Bourne Again Shell) | 1989 | GNU loyihasi, sh + ksh imkoniyatlari |
