@@ -78,6 +78,7 @@ cd Desktop
 cd ..
 ```
 
+
 ### 📝 Vazifalar:
 
 1. **Vazifa 1:** Terminalda `pwd` buyrug'ini ishlatib, hozirgi katalogingizni aniqlang
