@@ -1,9 +1,7 @@
 
----
 
 # **02-File-Operations/README.md**
 
-```markdown
 # 02-File-Operations – Fayllar bilan ishlash
 
 ## Asosiy buyruqlar
