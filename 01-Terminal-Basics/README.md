@@ -1,25 +1,30 @@
+# 1. Kirish va muhiti sozlash
 
----
+**Bash nima?**
+Bash — Linux va Unixlike tizimlarda keng tarqalgan qobiq (shell). U buyruqlarni qabul qiladi, skriptlarni bajaradi va tizim bilan interaktiv aloqa qiladi.
 
-# 2. Terminal asoslari va fayl tizimi
+**O'rnatish / tekshirish**
 
-**Asosiy buyruqlar**
+```bash
+bash --version
+which bash
+echo $SHELL
+```
 
-| Buyruq | Ma'no                      |
-| ------ | -------------------------- |
-| pwd    | Joriy katalogni ko'rsatadi |
-| ls     | Katalog ichini ro'yxatlash |
-| cd     | Katalogni o'zgartirish     |
-| mkdir  | Yangi katalog yaratish     |
-| rmdir  | Bo'sh katalogni o'chirish  |
+**Muhit o'zgaruvchilari**
+`~/.bashrc`, `~/.bash_profile` va global `/etc/bash.bashrc`. O'zgaruvchi qo'shish:
 
-**Amaliy mashq 2**
+```bash
+export MY_VAR="Salom"
+```
 
-* Vazifa: `project` nomli katalog yarating, ichida `src` va `bin` papkalarini yarating.
-* Kutilgan output (`ls project`):
+**Amaliy mashq 1**
+
+* Vazifa: Terminalda `hello.sh` faylini yaratib, ichiga `echo "Salom, Bash!"` yozing va ishga tushuring.
+* Kutilgan output:
 
 ```
-bin  src
+Salom, Bash!
 ```
 
 ---
