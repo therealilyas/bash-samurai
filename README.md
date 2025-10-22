@@ -41,7 +41,6 @@ Har bir bo‘limda **nazariya, amaliy mashqlar, vazifalar va `output` namunalari
 | 10 | [Globbing (Wildcard Matching)](./10-Globbing) | Fayl nomlarini moslashtirish, `*`, `?`, `[]` bilan ishlash |
 | 11 | [Fayl Kiritish/Chiqish va Yo‘naltirish (I/O Redirection)](./11-File-I-O-Redirection) | `>`, `<`, `>>`, `2>`, `&>` va fayl oqimlari bilan ishlash |
 | 12 | [Pipe va Filtrlar](./12-Pipes-Filters) | `|`, `grep`, `awk`, `sort`, `uniq`, `cut` kabi qulay filtr buyruqlar bilan |
-| 📘 | [Cheat Sheet](./cheatsheet.md) | Eng ko‘p ishlatiladigan Bash buyruqlari va sintaksis uchun tezkor qo‘llanma | 
 
 ---
 
