@@ -29,14 +29,19 @@ Har bir bo‘limda **nazariya, amaliy mashqlar, vazifalar va `output` namunalari
 
 | №  | Bo‘lim nomi | Tavsif |
 |----|--------------|--------|
-| 01 | [Kirish va Muhitni Sozlash](./01-Intro/README.md) | Bash nima, o‘rnatish, muhiti va dastlabki sozlamalar |
-| 02 | [Terminal Asoslari](./02-Terminal-Basics/README.md) | Terminal buyrug‘lari, fayl tizimi va navigatsiya |
-| 03 | [Fayllar bilan Ishlash](./03-File-Operations/README.md) | `cat`, `cp`, `mv`, `rm`, `less`, `head`, `tail` kabi buyruqlar bilan ishlash |
-| 04 | [Ruxsatlar, Foydalanuvchi va Guruhlar](./04-Permissions-Users/README.md) | `chmod`, `chown`, `sudo`, foydalanuvchi turlari va xavfsizlik |
-| 05 | [O‘zgaruvchilar](./05-Variables/README.md) | Lokal/global o‘zgaruvchilar, `export`, `$PATH`, `read` bilan ishlash |
-| 06 | [Arifmetika va Satrlar](./06-Arithmetics-Strings/README.md) | Arifmetik amallar, `expr`, `$(( ))`, matn bilan ishlash |
-| 07 | [Shart Operatorlari (Conditionals)](./07-Conditionals/README.md) | `if`, `else`, `elif`, `case` va `[[]]` bilan shartli mantiq |
-
+| 01 | [Kirish va Muhitni Sozlash](./01-Intro) | **Bash nima**, uni o‘rnatish, muhiti va dastlabki sozlamalar haqida |
+| 02 | [Terminal Asoslari](./02-Terminal-Basics) | Terminal buyrug‘lari, fayl tizimi va navigatsiya asoslari |
+| 03 | [Fayllar bilan Ishlash](./03-File-Operations) | `cat`, `cp`, `mv`, `rm`, `less`, `head`, `tail` kabi buyruqlardan foydalanish |
+| 04 | [Ruxsatlar, Foydalanuvchi va Guruhlar](./04-Permissions-Users) | `chmod`, `chown`, `sudo`, foydalanuvchi turlari va xavfsizlik |
+| 05 | [O‘zgaruvchilar](./05-Variables) | Lokal/global o‘zgaruvchilar, `export`, `$PATH`, `read` bilan ishlash |
+| 06 | [Arifmetika va Satrlar](./06-Arithmetics-Strings) | Arifmetik amallar, `expr`, `$(( ))`, satrlar bilan ishlash |
+| 07 | [Shart Operatorlari (Conditionals)](./07-Conditionals) | `if`, `else`, `elif`, `case`, `[[ ]]` bilan mantiqiy shartlar yozish |
+| 08 | [Takrorlash Operatorlari (Loops)](./08-Loops) | `for`, `while`, `until` sikllari, amaliy loyihalar bilan |
+| 09 | [Funktsiyalar va Modullar](./09-Functions-Modules) | Bash funksiyalari, argumentlar va modul strukturalari |
+| 10 | [Globbing (Wildcard Matching)](./10-Globbing) | Fayl nomlarini moslashtirish, `*`, `?`, `[]` bilan ishlash |
+| 11 | [Fayl Kiritish/Chiqish va Yo‘naltirish (I/O Redirection)](./11-File-I-O-Redirection) | `>`, `<`, `>>`, `2>`, `&>` va fayl oqimlari bilan ishlash |
+| 12 | [Pipe va Filtrlar](./12-Pipes-Filters) | `\|`, `grep`, `awk`, `sort`, `uniq`, `cut` kabi qulay filtr buyruqlar bilan |
+ 
 ---
 
 ## ⚙️ O‘rnatish
