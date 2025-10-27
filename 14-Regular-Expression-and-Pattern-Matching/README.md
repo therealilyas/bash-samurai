@@ -1,5 +1,3 @@
-
-
 ## 1️⃣4️⃣ REGEX VA GREP/EGREP
 **Global nomi:** Regular Expressions and Pattern Matching  
 **O'zbek nomi:** Muntazam ifodalar va pattern moslashtirish
@@ -708,5 +706,3 @@ fi
 3. **Vazifa 3:** Matndan barcha URL larni ajratib oluvchi va domenlariga qarab guruhlovchi dastur
 4. **Vazifa 4:** Credit card validator: 16 ta raqam, Luhn algoritmini tekshirish
 5. **Vazifa 5:** CSV faylni validatsiya qiluvchi skript - har bir ustun uchun alohida regex pattern
-
----
